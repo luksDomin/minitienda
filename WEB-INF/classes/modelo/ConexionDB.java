@@ -3,6 +3,8 @@ package modelo;
 
 /* Necesitamos importar este paquete para acceder al conector JDBC */
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexionDB {
 
@@ -25,15 +27,24 @@ public class ConexionDB {
      * @return
      * @throws java.lang.Exception
      */
-    protected Connection obtenerConexion() throws Exception {
+    protected Connection obtenerConexion() {
         
-        testDriver();
-        
-        String url = "";
-        url = "jdbc:postgresql://localhost:5432/minitienda";
-        Connection con = DriverManager.getConnection(url, "lucas", "lucas");
-        System.out.println("Conexion establecida con " + url + "...");
-        return con;
+        try {
+            
+            try {
+                testDriver();
+            } catch (Exception ex) {
+                System.out.println("Excepcion comprobando el driver");
+            }
+            
+            String url = "";
+            url = "jdbc:postgresql://localhost:5432/minitienda";
+            Connection con = DriverManager.getConnection(url, "lucas", "lucas");
+            System.out.println("Conexion establecida con " + url + "...");
+            return con;
+        } catch (SQLException ex) {
+        }
+        return null;
     }
 
     /**

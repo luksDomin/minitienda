@@ -52,7 +52,7 @@
             <a href="/minitienda/index.html">Seguir Comprando</a>
         </p>
         <p>
-            <a href="/minitienda/caja">Ir a pagar</a>
+            <a href="/minitienda/login">Ir a pagar</a>
         </p>
     </center>
 </body>
