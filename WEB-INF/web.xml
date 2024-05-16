@@ -44,4 +44,14 @@ PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         <servlet-name>Reg</servlet-name>
         <url-pattern>/registro</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Pagar</servlet-name>
+        <servlet-class>controlador.Pago</servlet-class>
+    </servlet>
+    
+     <servlet-mapping>
+        <servlet-name>Pagar</servlet-name>
+        <url-pattern>/pagar</url-pattern>
+    </servlet-mapping>
 </web-app>

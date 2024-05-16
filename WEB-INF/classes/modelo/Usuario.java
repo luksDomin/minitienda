@@ -1,29 +1,28 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
+
+import java.io.Serializable;
 
 /**
  *
  * @author lucas
  */
-public class Usuario {
-
-    private String username;
+public class Usuario implements Serializable{
+    private String correo;
     private String passwd;
-
-    public Usuario(String username, String passwd) {
-        this.username = username;
-        this.passwd = passwd;
-    }
     
-    public String getUsername() {
-        return username;
+    public Usuario(){
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPasswd() {
@@ -34,5 +33,7 @@ public class Usuario {
         this.passwd = passwd;
     }
     
+    
+            
     
 }

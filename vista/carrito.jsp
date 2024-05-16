@@ -1,26 +1,26 @@
 <%@page isELIgnored="false" %>
 <%@page session="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.HashMap" %> <!-- Importar HashMap -->
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.util.Map.Entry" %>
 
-<% 
-    HashMap<String, Integer> listaDiscosSesion = (HashMap<String, Integer>) session.getAttribute("listaDiscosSesion"); 
-%>
+
 
 
 <!DOCTYPE HTML>
 <HTML>
     <HEAD>
         <TITLE>Carrito</TITLE>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vista/css/carrito.css">
     </HEAD>
     <BODY>
+        <!-- Botones para iniciar y cerrar sesión -->
+        <form action="/proyecto_LucasSocrates_DominguezAgudo/login" method="get">
+            <input type="submit" name="iniciar" value="Iniciar Sesión">
+            <input type="submit" name="cerrar" value="Cerrar Sesión">
+        </form>
     <center>
         <H1>Carrito de la compra</H1>
 
-        <form action="/minitienda/miniForm" method="get">
+        <form action="/proyecto_LucasSocrates_DominguezAgudo/miniForm" method="post">
             <!-- Formulario para enviar la solicitud de eliminación -->
             <table border="0" cellpadding="0" width="75%" bgcolor="#FFFFFF">
                 <tr>
@@ -35,24 +35,24 @@
                     <tr>
                         <td><b><c:out value="${disco.key}"/></b></td>
                         <td><b><c:out value="${disco.value[0]}"/></b></td>
-                        <td><b><c:out value="${disco.value[1]}"/></b></td>
+                        <td><b><c:out value="${disco.value[1]}"/>$</b></td>
                         <td><input type="checkbox" name="eliminar" value="${disco.key}"></td>
                     </tr>
                 </c:forEach>
 
 
             </table>
-            <H3><c:out value="${precioFinal}"/></H3>
+            <H3>El precio final es de: <c:out value="${precioFinal}"/>$</H3>
 
             <p>
                 <input type="submit" value="Eliminar"> <!-- Botón para enviar la solicitud de eliminación -->
             </p>
         </form>
         <p>
-            <a href="/minitienda/index.html">Seguir Comprando</a>
+            <a href="/proyecto_LucasSocrates_DominguezAgudo/index.html">Seguir Comprando</a>
         </p>
         <p>
-            <a href="/minitienda/login">Ir a pagar</a>
+            <a href="/proyecto_LucasSocrates_DominguezAgudo/login">Ir a pagar</a>
         </p>
     </center>
 </body>

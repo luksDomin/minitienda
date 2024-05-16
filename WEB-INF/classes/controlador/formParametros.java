@@ -12,6 +12,12 @@ public class formParametros extends HttpServlet {
     public void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    public void doPost(HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
         // Generamos un objeto sesion
         HttpSession session = request.getSession(true);
 
@@ -83,12 +89,12 @@ public class formParametros extends HttpServlet {
                 }
             }
         }
-        
+
         //finalmente se calcula el precio final y se setean los atributos de la sesion
         session.setAttribute("precioFinal", carrito.calcularPrecio());
         session.setAttribute("carrito", carrito);
 
-        gotoPage("/vista/vista.jsp", request, response);
+        gotoPage("/vista/carrito.jsp", request, response);
     }
 
     private void gotoPage(String address, HttpServletRequest request, HttpServletResponse response)

@@ -6,17 +6,22 @@ public class InicioSesion {
 
     private String username;
     private String passwd;
+    private String tarjeta;
+    private String tipo;
 
     public InicioSesion(String username, String passwd) {
         this.username = username;
         this.passwd = passwd;
     }
 
+    public InicioSesion(String username, String passwd, String tarjeta, String tipo) {
+        this.username = username;
+        this.passwd = passwd;
+        this.tarjeta = tarjeta;
+        this.tipo = tipo;
+    }
+
     public Boolean realizarRegistro() {
-        // Configurar la conexión a la base de datos
-        String url = "jdbc:mysql://localhost:3306/nombre_basedatos";
-        String usuario = "usuario";
-        String contraseña = "contraseña";
 
         try {
             // Establecer la conexión
@@ -25,7 +30,7 @@ public class InicioSesion {
             Connection conexion = connect.obtenerConexion();
             // Consulta para verificar si el usuario ya existe
 
-            String consulta = "SELECT COUNT(*) FROM usuarios WHERE username = ?";
+            String consulta = "SELECT COUNT(*) FROM usuarios WHERE correo = ?";
 
             PreparedStatement pstmt = conexion.prepareStatement(consulta);
             pstmt.setString(1, username);
@@ -36,10 +41,12 @@ public class InicioSesion {
 
             if (count == 0) {
                 // Si el usuario no existe, insertarlo en la base de datos
-                String insercion = "INSERT INTO usuarios (username, passwd) VALUES (?, ?)";
+                String insercion = "INSERT INTO usuarios (correo, contraseña, tarjeta_credito, tipo_tarjeta) VALUES (?, ?, ?, ?)";
                 pstmt = conexion.prepareStatement(insercion);
                 pstmt.setString(1, username);
                 pstmt.setString(2, passwd);
+                pstmt.setString(3, tarjeta);
+                pstmt.setString(4, tipo);
 
                 pstmt.executeUpdate();
 
@@ -68,13 +75,14 @@ public class InicioSesion {
 
             Connection conexion = connect.obtenerConexion();
             // Consulta para verificar si el usuario y contraseña son correctos
-            String consulta = "SELECT COUNT(*) FROM usuarios WHERE username = ? AND passwd = ?";
+            String consulta = "SELECT COUNT(*) FROM usuarios WHERE correo = ? AND contraseña = ?";
 
             PreparedStatement pstmt = conexion.prepareStatement(consulta);
             pstmt.setString(1, username);
             pstmt.setString(2, passwd);
 
             ResultSet rs = pstmt.executeQuery();
+
             rs.next();
             int count = rs.getInt(1);
 
@@ -88,9 +96,13 @@ public class InicioSesion {
             }
 
             // Cerrar la conexión
+            pstmt.close();
+            rs.close();
             conexion.close();
         } catch (SQLException e) {
             System.out.println("Error al iniciar sesión: " + e.getMessage());
+        } finally {
+
         }
 
         return inicioSesionExitoso;
